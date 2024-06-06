@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 15, 2023 10:00:20 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.Tblticket" table="tblticket" catalog="projectanjay" optimistic-lock="version">
+        <id name="idTicket" type="java.lang.Integer">
+            <column name="id_ticket" />
+            <generator class="identity" />
+        </id>
+        <property name="ticketCode" type="string">
+            <column name="ticket_code" length="80" not-null="true" />
+        </property>
+        <property name="ticketType" type="string">
+            <column name="ticket_type" length="80" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 15, 2023 10:00:20 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.Tblemp" table="tblemp" catalog="projectanjay" optimistic-lock="version">
+        <id name="idEmployee" type="java.lang.Integer">
+            <column name="id_employee" />
+            <generator class="identity" />
+        </id>
+        <property name="namaEmployee" type="string">
+            <column name="nama_employee" length="100" not-null="true" />
+        </property>
+        <property name="gender" type="string">
+            <column name="gender" length="20" not-null="true" />
+        </property>
+        <property name="tlpn" type="string">
+            <column name="tlpn" length="15" not-null="true" />
+        </property>
+        <property name="sallary" type="string">
+            <column name="sallary" length="30" not-null="true" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="100" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

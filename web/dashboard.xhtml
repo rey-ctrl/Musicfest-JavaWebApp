@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Dashboard</title>
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="resources/css/bootstrap.min.js" type="text/javascript"></script>
+         <link href="resources/css/admin.css" rel="stylesheet" type="text/css"/>
+
+    </h:head>
+    <h:body>
+        <h:form>
+            <div class="container-fluid">
+                <div class="row" style="height: 609px">
+
+                    <!--  KOLOM SIDEBAR  -->
+                    <div class="col-2 " style="background-color: #004aad">
+
+                        <!--  LOGO  -->
+                        <div class="gambar mt-3" >
+                            <img style="width: 110px;margin-left: 40px;" src="resources/image/gamestore_logo_bg_biru.png" alt="" class="img-fluid "></img>   
+                        </div>
+
+                        <!--  CONTENT SIDE BAR  -->
+                        <div id="sidebar-wrapper">
+                            <ul class="sidebar-nav mt-4">
+                                <li>
+                                    <img src="" alt="" style="width: 30px"/>
+                                    <a href="dashboard.xhtml" style="color: #f4382d" class="none">Home</a>
+                                </li>
+                                <li>
+                                <img src="" alt="" style="width: 30px"/>
+                                    <a href="artist.xhtml" class="none">Artist</a>
+                                </li>
+                                <li>
+                                    <img src="" alt="" style="width: 30px"/>
+                                    <a href="employee.xhtml" class="none">Employee</a>
+                                </li>  
+                                <li>
+                                    <img src="" alt="" style="width: 30px"/>
+                                    <a href="customer.xhtml" class="none">Customer</a>
+                                </li>
+                                <li>
+                                    <img src="" alt="" style="width: 30px"/>
+                                    <a href="customer.xhtml" class="none">Ticket</a>
+                                </li>
+
+                            </ul> 
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body" style="text-align: center">
+                                        <img src="resources/image/exclamation.png" style="width: 120px; margin-top: 16px; margin-bottom: 16px" alt=""/>
+                                        <h2 style="margin-bottom: 16px"><b>Are you sure want to exit?</b></h2>
+                                        <p style="color: grey; font-size: 14px; margin-top: 8px">Please check back your work, don't make any mistakes !</p>
+                                    </div>
+                                    <div class="modal-footer" style="text-align: center">
+                                        <h:commandButton class="btn btn-outline-secondary" style="width:100px; margin-bottom: 12px;color: #2d3436; border-radius: 4px"  action="/dashboard.xhtml" value="Cancel"/> 
+                                        <h:commandButton class="btn btn-primary" style="width:60px; margin-bottom: 12px;color: whitesmoke; border-radius: 4px"  action="/index.xhtml" value="Yes"/> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>
+                    <!--  KOLOM SIDEBAR  -->
+
+                    <!--  CONTENT DASHBOARD  -->
+                    <div class="col-10">
+                        <div class="alert alert-success" role="alert" style="margin: 20px">
+                            <a><img style="width: 30px; margin-left: 10px; margin-right: 10px" src="resources/image/Check_fill.png" alt="" class="img-fluid "></img> </a>
+                            Yasss... Successful login, Happy work  <b><h:outputText value="#{tbladmin.admin}"/></b>
+                        </div>
+                        <h:form id="dash">
+                            <h:commandButton class="buttondas" image="resources/image/home_logo.png" action="/index.xhtml" value="LogOut"/>
+                        </h:form>  
+                    </div>
+                    <!--  CONTENT DASHBOARD  -->
+                </div>
+            </div> 
+        </h:form>
+    </h:body>
+</html>
+

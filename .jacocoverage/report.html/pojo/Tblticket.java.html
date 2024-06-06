@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Tblticket.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Musicfest&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">pojo</a> &gt; <span class="el_source">Tblticket.java</span></div><h1>Tblticket.java</h1><pre class="source lang-java linenums">package pojo;
+// Generated Oct 13, 2023 9:59:41 PM by Hibernate Tools 4.3.1
+
+import DAO.DAOTicket;
+import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+
+@ManagedBean
+public class Tblticket  implements java.io.Serializable {
+
+
+     private Integer idTicket;
+     private String ticketCode;
+     private String ticketType;
+
+     public void save_Ticket() {
+<span class="pc bpc" id="L19" title="7 of 8 branches missed.">        if (ticketType == null || ticketType.isEmpty() || ticketCode == null || ticketCode.isEmpty()) {</span>
+<span class="fc" id="L20">            FacesMessage message = new FacesMessage(&quot;Data cannot be empty!&quot;);</span>
+<span class="fc" id="L21">            message.setSeverity(FacesMessage.SEVERITY_ERROR); // Menetapkan tingkat kesalahan menjadi error</span>
+<span class="nc" id="L22">            FacesContext.getCurrentInstance().addMessage(null, message);</span>
+<span class="nc" id="L23">        } else {</span>
+<span class="nc" id="L24">            DAOTicket daoTicket = new DAOTicket();</span>
+<span class="nc" id="L25">            daoTicket.addTicket(this);</span>
+        }
+<span class="nc" id="L27">    }</span>
+
+     public List&lt;Tblticket&gt; getAllRecoordss() {
+<span class="fc" id="L30">        DAOTicket tic = new DAOTicket();</span>
+<span class="nc" id="L31">        List&lt;Tblticket&gt; lTic = tic.retreveTicket();</span>
+<span class="nc" id="L32">        return lTic;</span>
+    }
+
+    public String getByIdtic() {
+<span class="nc" id="L36">        String ticket_ID = idTicket.toString();</span>
+<span class="nc" id="L37">        DAOTicket tic = new DAOTicket();</span>
+<span class="nc" id="L38">        List&lt;Tblticket&gt; lTic = tic.getbyID(ticket_ID);</span>
+
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (!lTic.isEmpty()) {</span>
+<span class="nc" id="L41">            ticketType = lTic.get(0).getTicketType();</span>
+<span class="nc" id="L42">            ticketCode = (String) lTic.get(0).getTicketCode();</span>
+        } else {
+<span class="nc" id="L44">            FacesMessage message = new FacesMessage(&quot;Ticket with ID &quot; + ticket_ID + &quot; doesn't exist.&quot;);</span>
+<span class="nc" id="L45">            message.setSeverity(FacesMessage.SEVERITY_ERROR);</span>
+<span class="nc" id="L46">            FacesContext.getCurrentInstance().addMessage(null, message);</span>
+        }
+
+<span class="nc" id="L49">        return &quot;ticket&quot;;</span>
+    }
+
+    public String editta() {
+<span class="pc bpc" id="L53" title="7 of 8 branches missed.">        if (ticketType == null || ticketType.isEmpty() || ticketCode == null || ticketCode.isEmpty()) {</span>
+<span class="fc" id="L54">            FacesMessage message = new FacesMessage(&quot;Data cannot be empty!&quot;);</span>
+<span class="fc" id="L55">            message.setSeverity(FacesMessage.SEVERITY_ERROR); // Menetapkan tingkat kesalahan menjadi error</span>
+<span class="nc" id="L56">            FacesContext.getCurrentInstance().addMessage(null, message);</span>
+<span class="nc" id="L57">        } else {</span>
+<span class="nc" id="L58">            DAOTicket tic = new DAOTicket();</span>
+<span class="nc" id="L59">            tic.editTicket(this);</span>
+<span class="nc" id="L60">            ticketType = &quot;&quot;;</span>
+<span class="nc" id="L61">            ticketCode = &quot;&quot;;</span>
+        }
+<span class="nc" id="L63">        return &quot;ticket&quot;;</span>
+    }
+
+    public String deleteea() {
+<span class="fc" id="L67">        DAOTicket tic = new DAOTicket();</span>
+<span class="nc" id="L68">        tic.deleteTicket(idTicket);</span>
+<span class="nc" id="L69">        ticketType = &quot;&quot;;</span>
+<span class="nc" id="L70">        ticketCode = &quot;&quot;;</span>
+<span class="nc" id="L71">        return &quot;ticket&quot;;</span>
+    }
+
+    public String retsete() {
+<span class="fc" id="L75">        DAOTicket tic = new DAOTicket();</span>
+<span class="nc" id="L76">        tic.resetTicket(this);</span>
+<span class="nc" id="L77">        ticketType = &quot;&quot;;</span>
+<span class="nc" id="L78">        ticketCode = &quot;&quot;;</span>
+<span class="nc" id="L79">        return &quot;ticket&quot;;</span>
+    }
+    
+<span class="fc" id="L82">    public Tblticket() {</span>
+<span class="fc" id="L83">    }</span>
+
+<span class="nc" id="L85">    public Tblticket(String ticketCode, String ticketType) {</span>
+<span class="nc" id="L86">       this.ticketCode = ticketCode;</span>
+<span class="nc" id="L87">       this.ticketType = ticketType;</span>
+<span class="nc" id="L88">    }</span>
+   
+    public Integer getIdTicket() {
+<span class="fc" id="L91">        return this.idTicket;</span>
+    }
+    
+    public void setIdTicket(Integer idTicket) {
+<span class="fc" id="L95">        this.idTicket = idTicket;</span>
+<span class="fc" id="L96">    }</span>
+    public String getTicketCode() {
+<span class="fc" id="L98">        return this.ticketCode;</span>
+    }
+    
+    public void setTicketCode(String ticketCode) {
+<span class="fc" id="L102">        this.ticketCode = ticketCode;</span>
+<span class="fc" id="L103">    }</span>
+    public String getTicketType() {
+<span class="fc" id="L105">        return this.ticketType;</span>
+    }
+    
+    public void setTicketType(String ticketType) {
+<span class="fc" id="L109">        this.ticketType = ticketType;</span>
+<span class="fc" id="L110">    }</span>
+
+
+
+
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

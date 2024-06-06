@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DAOEvent.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Musicfest&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">DAO</a> &gt; <span class="el_source">DAOEvent.java</span></div><h1>DAOEvent.java</h1><pre class="source lang-java linenums">package DAO;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import pojo.AbsoluteUtil;
+import pojo.Tblevent;
+
+/**
+ *
+ * @author Indri
+ */
+<span class="fc" id="L22">public class DAOEvent {</span>
+   public List&lt;Tblevent&gt; getBy(String uPduct, String uPurch, String uSell, String uStk) 
+   {
+<span class="fc" id="L25">       Transaction trans = null;</span>
+<span class="fc" id="L26">       Tblevent ev = new Tblevent();</span>
+<span class="fc" id="L27">       List&lt;Tblevent&gt; product = new ArrayList();</span>
+       
+<span class="nc" id="L29">       Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+       try{
+<span class="nc" id="L31">           trans = session.beginTransaction();</span>
+<span class="nc" id="L32">           Query query = session.createQuery(&quot;from Tblevent where artistName=:uPduct AND artistBio=:uPurch&quot;);</span>
+<span class="nc" id="L33">           query.setString(&quot;uPduct&quot;, uPduct);</span>
+<span class="nc" id="L34">           query.setString(&quot;uPurch&quot;, uPurch);</span>
+<span class="nc" id="L35">           ev = (Tblevent) query.uniqueResult();</span>
+<span class="nc" id="L36">           product = query.list();</span>
+<span class="nc" id="L37">           trans.commit();</span>
+<span class="nc" id="L38">       } catch (Exception e){</span>
+<span class="nc" id="L39">           System.out.println(e);</span>
+<span class="nc" id="L40">       }</span>
+<span class="nc" id="L41">       return product;</span>
+   }
+   
+   public void add_event(Tblevent event)
+   {
+<span class="fc" id="L46">       Transaction trans = null;</span>
+<span class="nc" id="L47">       Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+       try{
+<span class="nc" id="L49">           trans = session.beginTransaction();</span>
+<span class="nc" id="L50">           session.save(event);</span>
+<span class="nc" id="L51">           trans.commit();</span>
+<span class="nc" id="L52">       }catch(Exception e){</span>
+<span class="nc" id="L53">           System.out.println(e);</span>
+<span class="nc" id="L54">       }</span>
+<span class="nc" id="L55">   }</span>
+   
+   public List&lt;Tblevent&gt; retreveTblevent()
+   {
+<span class="fc" id="L59">       List prod = new ArrayList();</span>
+<span class="fc" id="L60">       Tblevent prod1 = new Tblevent();</span>
+<span class="fc" id="L61">       Transaction trans = null;</span>
+<span class="nc" id="L62">       Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+       try{
+<span class="nc" id="L64">           trans = session.beginTransaction();</span>
+<span class="nc" id="L65">           Query query = session.createQuery(&quot;from Tblevent&quot;);</span>
+<span class="nc" id="L66">           prod = query.list();</span>
+<span class="nc" id="L67">           prod.add(prod1.getIdEvent());</span>
+<span class="nc" id="L68">           prod.add(prod1.getArtistName());</span>
+<span class="nc" id="L69">           prod.add(prod1.getArtistBio());</span>
+<span class="nc" id="L70">           trans.commit();</span>
+<span class="nc" id="L71">       }catch(Exception e){</span>
+<span class="nc" id="L72">           System.out.println(e);</span>
+<span class="nc" id="L73">       }</span>
+<span class="nc" id="L74">       return prod;</span>
+   }
+   
+   public List&lt;Tblevent&gt; getbyID(String idP)
+   {
+<span class="fc" id="L79">       Tblevent plo = new Tblevent();</span>
+<span class="fc" id="L80">       List&lt;Tblevent&gt; lPlo = new ArrayList();</span>
+       
+<span class="fc" id="L82">       Transaction trans = null;</span>
+<span class="nc" id="L83">       Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+       
+       try{
+<span class="nc" id="L86">           trans = session.beginTransaction();</span>
+<span class="nc" id="L87">           Query query = session.createQuery(&quot;from Tblevent where id_event= :id&quot;);</span>
+<span class="nc" id="L88">           query.setString(&quot;id&quot;, idP);</span>
+<span class="nc" id="L89">           plo = (Tblevent) query.uniqueResult();</span>
+<span class="nc" id="L90">           lPlo = query.list();</span>
+<span class="nc" id="L91">           trans.commit();</span>
+<span class="nc" id="L92">       } catch (Exception e){</span>
+<span class="nc" id="L93">           System.out.println(e);</span>
+<span class="nc" id="L94">       }</span>
+<span class="nc" id="L95">       return lPlo;</span>
+   }
+   
+   public void deleteevent(Integer idP)
+   {
+<span class="fc" id="L100">       Transaction trans = null;</span>
+<span class="nc" id="L101">       Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+       
+       try{
+<span class="nc" id="L104">           trans = session.beginTransaction();</span>
+<span class="nc" id="L105">           Tblevent pro = (Tblevent) session.load(Tblevent.class, new Integer(idP));</span>
+<span class="nc" id="L106">           session.delete(pro);</span>
+<span class="nc" id="L107">           trans.commit();</span>
+<span class="nc" id="L108">       }catch (Exception e){</span>
+<span class="nc" id="L109">           System.out.println(e);</span>
+<span class="nc" id="L110">       }</span>
+<span class="nc" id="L111">   }</span>
+   
+   public void editevent(Tblevent eve)
+   {
+<span class="fc" id="L115">       Transaction trans = null;</span>
+<span class="nc" id="L116">       Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+       
+       try{
+<span class="nc" id="L119">           trans = session.beginTransaction();</span>
+<span class="nc" id="L120">           session.update(eve);</span>
+<span class="nc" id="L121">           trans.commit();</span>
+<span class="nc" id="L122">       } catch (Exception e){</span>
+<span class="nc" id="L123">           System.out.println(e);</span>
+<span class="nc" id="L124">       }</span>
+<span class="nc" id="L125">   }</span>
+   
+   public void resetevent(Tblevent eve)
+   {
+<span class="fc" id="L129">       Transaction trans = null;</span>
+<span class="nc" id="L130">       Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+       
+       try{
+<span class="nc" id="L133">           trans = session.beginTransaction();</span>
+<span class="nc" id="L134">           session.clear();</span>
+<span class="nc" id="L135">           trans.commit();</span>
+<span class="nc" id="L136">       }catch(Exception e){</span>
+<span class="nc" id="L137">           System.out.println(e);</span>
+<span class="nc" id="L138">       }</span>
+<span class="nc" id="L139">   }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

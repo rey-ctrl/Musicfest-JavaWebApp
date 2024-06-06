@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Tbladmin.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Musicfest&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">pojo</a> &gt; <span class="el_source">Tbladmin.java</span></div><h1>Tbladmin.java</h1><pre class="source lang-java linenums">package pojo;
+// Generated Oct 15, 2023 10:00:20 PM by Hibernate Tools 4.3.1
+
+import DAO.DAOAdminlogin;
+import DAO.DAOadmin;
+import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+
+
+@ManagedBean
+public class Tbladmin  implements java.io.Serializable {
+
+
+     private Integer idAdmin;
+     private String admin;
+     private String password;
+     
+     public void save_admin() {
+<span class="pc bpc" id="L21" title="7 of 8 branches missed.">        if (admin == null || admin.isEmpty() || password == null || password.isEmpty()) {</span>
+            // Menampilkan pesan kesalahan jika admin atau password kosong
+<span class="fc" id="L23">            FacesMessage message = new FacesMessage(&quot;admin or Password cannot be empty!&quot;);</span>
+<span class="fc" id="L24">            message.setSeverity(FacesMessage.SEVERITY_ERROR);</span>
+<span class="nc" id="L25">            FacesContext.getCurrentInstance().addMessage(null, message);</span>
+<span class="nc" id="L26">        } else {</span>
+            // Melanjutkan penyimpanan data ke database jika validasi sukses
+<span class="nc" id="L28">            DAOAdminlogin add = new DAOAdminlogin();</span>
+<span class="nc" id="L29">            add.add_user(this);</span>
+        }
+<span class="nc" id="L31">    }</span>
+
+    public String login_admin() {
+<span class="fc" id="L34">        DAOAdminlogin uDao = new DAOAdminlogin();</span>
+<span class="nc" id="L35">        List&lt;Tbladmin&gt; us = uDao.getBy(admin, password);</span>
+        try {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">            if (us != null) {</span>
+<span class="nc" id="L38">                admin = us.get(0).admin;</span>
+<span class="nc" id="L39">                password = us.get(0).password;</span>
+<span class="nc" id="L40">                return &quot;dashboard&quot;;</span>
+            }
+<span class="nc" id="L42">        } catch (Exception e) {</span>
+<span class="nc" id="L43">            System.out.println(e);</span>
+<span class="nc" id="L44">        }</span>
+<span class="nc" id="L45">        return &quot;gagal&quot;;</span>
+    }
+
+    public List&lt;Tbladmin&gt; getAllRecords() {
+<span class="fc" id="L49">        DAOadmin usr = new DAOadmin();</span>
+<span class="nc" id="L50">        List&lt;Tbladmin&gt; lUsr = usr.retrveTbladmin();</span>
+<span class="nc" id="L51">        return lUsr;</span>
+    }
+
+    public String getByIdus() {
+<span class="nc" id="L55">        String id_admin = idAdmin.toString();</span>
+<span class="nc" id="L56">        DAOadmin usr = new DAOadmin();</span>
+<span class="nc" id="L57">        List&lt;Tbladmin&gt; lUsr = usr.getbyID(id_admin);</span>
+
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (!lUsr.isEmpty()) {</span>
+            // User ditemukan, isi nilai-nilai
+<span class="nc" id="L61">            admin = lUsr.get(0).getAdmin();</span>
+<span class="nc" id="L62">            password = lUsr.get(0).getPassword();</span>
+        } else {
+            // User tidak ditemukan, berikan pesan kesalahan kepada pengguna
+<span class="nc" id="L65">            FacesMessage message = new FacesMessage(&quot;admin with ID &quot; + id_admin + &quot; doesn't exist.&quot;);</span>
+<span class="nc" id="L66">            message.setSeverity(FacesMessage.SEVERITY_ERROR); // Menetapkan tingkat kesalahan menjadi error</span>
+<span class="nc" id="L67">            FacesContext.getCurrentInstance().addMessage(null, message);</span>
+        }
+
+<span class="nc" id="L70">        return &quot;admin&quot;;</span>
+    }
+
+    public String edit() {
+<span class="pc bpc" id="L74" title="7 of 8 branches missed.">        if (admin == null || admin.isEmpty() || password == null || password.isEmpty()) {</span>
+            // Menampilkan pesan kesalahan jika username atau password kosong
+<span class="fc" id="L76">            FacesMessage message = new FacesMessage(&quot;Username or Password cannot be empty!&quot;);</span>
+<span class="nc" id="L77">            FacesContext.getCurrentInstance().addMessage(null, message);</span>
+<span class="nc" id="L78">            return null; // Tidak melakukan perubahan jika ada kesalahan</span>
+        } else {
+            // Melanjutkan perubahan data jika validasi sukses
+<span class="nc" id="L81">            DAOadmin usr = new DAOadmin();</span>
+<span class="nc" id="L82">            usr.editadmin(this);</span>
+<span class="nc" id="L83">            admin = &quot;&quot;;</span>
+<span class="nc" id="L84">            password = &quot;&quot;;</span>
+<span class="nc" id="L85">            return &quot;admin&quot;;</span>
+        }
+    }
+
+    public String delete() {
+<span class="fc" id="L90">        DAOadmin usr = new DAOadmin();</span>
+<span class="nc" id="L91">        usr.deleteadmin(idAdmin);</span>
+<span class="nc" id="L92">        admin = &quot;&quot;;</span>
+<span class="nc" id="L93">        password = &quot;&quot;;</span>
+
+<span class="nc" id="L95">        return &quot;admin&quot;;</span>
+    }
+
+    public String retse() {
+<span class="fc" id="L99">        DAOadmin usr = new DAOadmin();</span>
+<span class="nc" id="L100">        usr.resetadmin(this);</span>
+<span class="nc" id="L101">        admin = &quot;&quot;;</span>
+<span class="nc" id="L102">        password = &quot;&quot;;</span>
+
+<span class="nc" id="L104">        return &quot;admin&quot;;</span>
+    } 
+
+<span class="fc" id="L107">    public Tbladmin() {</span>
+<span class="fc" id="L108">    }</span>
+
+<span class="nc" id="L110">    public Tbladmin(String admin, String password) {</span>
+<span class="nc" id="L111">       this.admin = admin;</span>
+<span class="nc" id="L112">       this.password = password;</span>
+<span class="nc" id="L113">    }</span>
+   
+    public Integer getIdAdmin() {
+<span class="fc" id="L116">        return this.idAdmin;</span>
+    }
+    
+    public void setIdAdmin(Integer idAdmin) {
+<span class="fc" id="L120">        this.idAdmin = idAdmin;</span>
+<span class="fc" id="L121">    }</span>
+    public String getAdmin() {
+<span class="fc" id="L123">        return this.admin;</span>
+    }
+    
+    public void setAdmin(String admin) {
+<span class="fc" id="L127">        this.admin = admin;</span>
+<span class="fc" id="L128">    }</span>
+    public String getPassword() {
+<span class="fc" id="L130">        return this.password;</span>
+    }
+    
+    public void setPassword(String password) {
+<span class="fc" id="L134">        this.password = password;</span>
+<span class="fc" id="L135">    }</span>
+
+
+
+
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

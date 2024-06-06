@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DAOuser.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Musicfest&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">DAO</a> &gt; <span class="el_source">DAOuser.java</span></div><h1>DAOuser.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package DAO;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import pojo.AbsoluteUtil;
+import pojo.Tbluser;
+
+/**
+ *
+ * @author Indri
+ */
+<span class="fc" id="L20">public class DAOuser {</span>
+    
+    public List&lt;Tbluser&gt; retrveTbluser()    
+    {
+<span class="fc" id="L24">        List stud = new ArrayList();</span>
+<span class="fc" id="L25">        Tbluser stud1 = new Tbluser();</span>
+<span class="fc" id="L26">        Transaction trans = null;</span>
+<span class="nc" id="L27">        Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+        try{
+<span class="nc" id="L29">            trans = session.beginTransaction();</span>
+<span class="nc" id="L30">            Query query = session.createQuery(&quot;from Tbluser&quot;);</span>
+<span class="nc" id="L31">            stud = query.list();</span>
+<span class="nc" id="L32">            stud.add(stud1.getIdUser());</span>
+<span class="nc" id="L33">            stud.add(stud1.getUsername());</span>
+<span class="nc" id="L34">            stud.add(stud1.getPassword());</span>
+<span class="nc" id="L35">            trans.commit();</span>
+<span class="nc" id="L36">        }catch(Exception e){</span>
+<span class="nc" id="L37">            System.out.println(e);</span>
+<span class="nc" id="L38">        }</span>
+<span class="nc" id="L39">        return stud;</span>
+    }
+    
+    public List&lt;Tbluser&gt;getbyID(String idU){
+<span class="fc" id="L43">        Tbluser usr = new Tbluser();</span>
+<span class="fc" id="L44">        List&lt;Tbluser&gt; iUsr = new ArrayList();</span>
+        
+<span class="fc" id="L46">        Transaction trans = null;</span>
+<span class="nc" id="L47">        Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+        
+        try{
+<span class="nc" id="L50">            trans = session.beginTransaction();</span>
+<span class="nc" id="L51">            Query query = session.createQuery(&quot;from Tbluser where id_user = :id&quot;);</span>
+<span class="nc" id="L52">            query.setString(&quot;id&quot;, idU);</span>
+<span class="nc" id="L53">            usr = (Tbluser) query.uniqueResult();</span>
+<span class="nc" id="L54">            iUsr = query.list();</span>
+<span class="nc" id="L55">            trans.commit();</span>
+<span class="nc" id="L56">        }catch(Exception e){</span>
+<span class="nc" id="L57">            System.out.println(e);</span>
+<span class="nc" id="L58">        }</span>
+<span class="nc" id="L59">        return iUsr;</span>
+    }
+    
+    public void deleteUser(Integer idU)
+    {
+<span class="fc" id="L64">        Transaction trans = null;</span>
+<span class="nc" id="L65">        Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+        
+        try{
+<span class="nc" id="L68">            trans = session.beginTransaction();</span>
+<span class="nc" id="L69">            Tbluser usr = (Tbluser) session.load(Tbluser.class, new Integer(idU));</span>
+<span class="nc" id="L70">            session.delete(usr);</span>
+<span class="nc" id="L71">            trans.commit();</span>
+<span class="nc" id="L72">        }catch(Exception e){</span>
+<span class="nc" id="L73">            System.out.println(e);</span>
+<span class="nc" id="L74">        }</span>
+<span class="nc" id="L75">    }</span>
+    
+    public void editUser(Tbluser usr)
+    {
+<span class="fc" id="L79">        Transaction trans = null;</span>
+<span class="nc" id="L80">        Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+        
+        try{
+<span class="nc" id="L83">            trans = session.beginTransaction();</span>
+<span class="nc" id="L84">            session.update(usr);</span>
+<span class="nc" id="L85">            trans.commit();</span>
+<span class="nc" id="L86">        }catch(Exception e){</span>
+<span class="nc" id="L87">            System.out.println(e);</span>
+<span class="nc" id="L88">        }</span>
+<span class="nc" id="L89">    }</span>
+    
+    public void resetUser(Tbluser usr)
+   {
+<span class="fc" id="L93">       Transaction trans = null;</span>
+<span class="nc" id="L94">       Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+       
+       try{
+<span class="nc" id="L97">           trans = session.beginTransaction();</span>
+<span class="nc" id="L98">           session.clear();</span>
+<span class="nc" id="L99">           trans.commit();</span>
+<span class="nc" id="L100">       }catch(Exception e){</span>
+<span class="nc" id="L101">           System.out.println(e);</span>
+<span class="nc" id="L102">       }</span>
+<span class="nc" id="L103">   }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

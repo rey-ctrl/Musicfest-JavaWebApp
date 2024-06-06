@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=  , initial-scale=1.0" />
+        <title>MusicFestival</title>
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&amp;display=swap" rel="stylesheet" />
+
+        <!-- Feather Icons -->
+        <script src="https://unpkg.com/feather-icons"></script>
+
+        <!-- My Style -->
+        <link href="resources/css/style.css" rel="stylesheet" type="text/css"/>
+    
+    </h:head>
+        <h:body>
+                <!-- Navbar Start -->
+                <nav class="navbar">
+                  <a href="#" class="navbar-logo">Music<span>fest</span></a>
+
+                  <div class="navbar-nav">
+                      <a href="Event.xhtml">Home</a>
+                      <a href="#about">About Us</a>
+                      <a href="#Artist">Artists</a>
+                      <a href="#contact">Location</a>
+                  </div>
+                  <div class="navbar-extra">
+                  <a href="index.xhtml" class="cta">Logout</a>
+                  </div>
+                </nav>
+            <!-- Navbar End -->
+            
+            <!-- Hero Section (for interface and button and etc)  start -->
+                <section class="hero" id="home">
+                    <video autoplay="autoplay" loop="loop" muted="muted">
+                    <source src="resources/image/Timeline-mp4.mov" type="video/mp4" />
+                  </video>
+                  <div class="content">
+                    <h1>Music For Lifes </h1>
+                    <p>Just Created For you </p>
+                  </div>
+                </section>
+            <!-- Hero Section end -->
+
+            <!-- About Section Start -->
+                <section id="about" class="about">
+                  <h2><span>About</span> Us</h2>
+                  <div class="row">
+                      <img src="resources/image/Mainstage.jpg" alt="'About Us"></img>
+                    <div class="content">
+                      <h3>MusicFest</h3>
+                      <p>Get ready to experience the rhythm of a lifetime at our upcoming music festival Join us for an unforgettable weekend filled with electrifying performances, a vibrant atmosphere, and a celebration of music that will send your senses soaring.</p>
+                    </div>
+                  </div>
+                </section>
+            <!-- About Section End -->
+
+
+            <!-- Artist Section Start -->
+            <section id="Artist" class="Artist">
+              <h2><span>Our</span> Artists</h2>
+            </section>
+
+              <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span> 
+                <span class="dot" onclick="currentSlide(2)"></span> 
+                <span class="dot" onclick="currentSlide(3)"></span> 
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
+              </div>
+                <div class="content-main">
+                    <div class="product-tile">
+                        <a href="#" style="text-decoration: none;" onclick="showProductDetail(1)">
+                            <img src="resources/image/Artist/Avicii.jpg" alt="Product Image" />
+                            <h3>Avicii</h3>
+                    </a>
+                </div>
+
+                <div class="product-tile">
+                    <a href="#" style="text-decoration: none;" onclick="showProductDetail(2)">
+                        <img src="resources/image/Artist/kanye_west.jpeg" alt="Product Image" />
+                        <h3>Kanye west</h3>
+                    </a>
+                </div>
+
+                <div class="product-tile">
+                    <a href="#" style="text-decoration: none;" onclick="showProductDetail(3)">
+                        <img src="resources/image/Artist/martin_garrix.jpg" alt="Product Image" />
+                        <h3>Martin Garrix</h3>
+                    </a>
+                </div>
+
+                <div class="product-tile">
+                    <a href="#" style="text-decoration: none;" onclick="showProductDetail(4)">
+                        <img src="resources/image/Artist/cavetown.jpg" alt="Product Image" />
+                        <h3>Cavetown</h3>
+                    </a>
+                </div>
+
+                <div class="product-tile">
+                    <a href="#" style="text-decoration: none;" onclick="showProductDetail(5)">
+                        <img src="resources/image/Artist/bootstrap.jpeg" alt="Product Image" />
+                        <h3>Bootstraps</h3>
+                    </a>
+                </div>
+
+                <div class="product-tile">
+                    <a href="#" style="text-decoration: none;" onclick="showProductDetail(6)">
+                        <img src="resources/image/Artist/LIl_salmonella.jpeg" alt="Product Image" />
+                        <h3>Lil Salmonella</h3>
+                    </a>
+                </div>
+                </div>
+            <!-- Artist Section End -->
+
+            <!-- Contact Section Start -->
+            <section id="contact" class="contact">
+              <h2><span>Find</span> Us</h2>
+              <p>Gather around The Musics.</p>
+              <div class="row">
+                <div class="map-container">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31721.343596047645!2d106.81809200000001!3d-6.372306449999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ec029f6b544b%3A0xbe8a105b72cbd07c!2sBeji%2C%20Depok%20City%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1686811427136!5m2!1sen!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="map" width="400" height="300"></iframe>
+                  <div class="map-info">
+                    <h3>Our Location</h3>
+                    <p>Currently, Come Near to Capital City of Indonesia, namely in the Beji area, Depok City.</p>
+                    <button onclick="showDirections()">DIRECTION</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- Contact Section End -->
+
+            <!-- Footer Section Start -->
+            <footer>
+            <div class="socials">
+              <a href="#"><i data-feather="instagram"></i></a>
+                <a href="#"><i data-feather="twitter"></i></a>
+                <a href="#"><i data-feather="facebook"></i></a>
+                </div>
+
+                <div class="links">
+                  <a href="#home">Home</a>
+                  <a href="#about">About Us</a>
+                  <a href="#Artist">Our Artist</a>
+                  <a href="#contact">Contact</a>
+                </div>
+
+                <div class="credit">
+                  <p>Created by <a href="">Group 6 3SE2</a> | &copy; 2023.</p>
+                </div>
+              </footer>
+            <!-- Footer Section End -->
+
+            <!-- Feather Icons -->
+            <script>
+              feather.replace();
+            </script>
+            
+    </h:body>
+</html>
+

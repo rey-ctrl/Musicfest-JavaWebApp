@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Tblevent.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Musicfest&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">pojo</a> &gt; <span class="el_source">Tblevent.java</span></div><h1>Tblevent.java</h1><pre class="source lang-java linenums">package pojo;
+// Generated Oct 15, 2023 10:00:20 PM by Hibernate Tools 4.3.1
+
+import DAO.DAOEvent;
+import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+
+
+@ManagedBean
+public class Tblevent  implements java.io.Serializable {
+
+     private Integer idEvent;
+     private String artistName;
+     private String artistBio;
+
+     public void save_event() {
+<span class="pc bpc" id="L19" title="7 of 8 branches missed.">        if (artistName == null || artistName.isEmpty() || artistBio == null || artistBio.isEmpty()) {</span>
+            // Menampilkan pesan kesalahan jika kolom yang diperlukan kosong
+<span class="fc" id="L21">            FacesMessage message = new FacesMessage(&quot;Data cannot be empty!&quot;);</span>
+<span class="fc" id="L22">            message.setSeverity(FacesMessage.SEVERITY_ERROR);</span>
+<span class="nc" id="L23">            FacesContext.getCurrentInstance().addMessage(null, message);</span>
+<span class="nc" id="L24">        } else {</span>
+            // Melanjutkan penyimpanan produk ke database jika validasi sukses
+<span class="nc" id="L26">            DAOEvent addd = new DAOEvent();</span>
+<span class="nc" id="L27">            addd.add_event(this);</span>
+        }
+<span class="nc" id="L29">    }</span>
+
+    public List&lt;Tblevent&gt; getAllRecordss() {
+<span class="fc" id="L32">        DAOEvent plo = new DAOEvent();</span>
+<span class="nc" id="L33">        List&lt;Tblevent&gt; lPlo = plo.retreveTblevent();</span>
+<span class="nc" id="L34">        return lPlo;</span>
+    }
+
+    public String getByIdeve() {
+<span class="nc" id="L38">        String id_event = idEvent.toString();</span>
+<span class="nc" id="L39">        DAOEvent plo = new DAOEvent();</span>
+<span class="nc" id="L40">        List&lt;Tblevent&gt; lPlo = plo.getbyID(id_event);</span>
+
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (!lPlo.isEmpty()) {</span>
+            // Produk ditemukan, isi nilai-nilai
+<span class="nc" id="L44">            artistName = lPlo.get(0).getArtistName();</span>
+<span class="nc" id="L45">            artistBio = lPlo.get(0).getArtistBio();</span>
+        } else {
+            // Produk tidak ditemukan, berikan pesan kesalahan kepada pengguna
+<span class="nc" id="L48">            FacesMessage message = new FacesMessage(&quot;event with ID &quot; + id_event + &quot; doesn't exist.&quot;);</span>
+<span class="nc" id="L49">            message.setSeverity(FacesMessage.SEVERITY_ERROR); // Menetapkan tingkat kesalahan menjadi error</span>
+<span class="nc" id="L50">            FacesContext.getCurrentInstance().addMessage(null, message);</span>
+        }
+<span class="nc" id="L52">        return &quot;event&quot;;</span>
+    }
+
+    public String edit() {
+<span class="pc bpc" id="L56" title="7 of 8 branches missed.">        if (artistName == null || artistName.isEmpty() || artistBio == null || artistBio.isEmpty()) {</span>
+<span class="fc" id="L57">            FacesMessage message = new FacesMessage(&quot;Data cannot be empty!&quot;);</span>
+<span class="fc" id="L58">            message.setSeverity(FacesMessage.SEVERITY_ERROR); // Menetapkan tingkat kesalahan menjadi error</span>
+<span class="nc" id="L59">            FacesContext.getCurrentInstance().addMessage(null, message);</span>
+<span class="nc" id="L60">        } else {</span>
+<span class="nc" id="L61">            DAOEvent plo = new DAOEvent();</span>
+<span class="nc" id="L62">            plo.editevent(this);</span>
+<span class="nc" id="L63">            artistName = &quot;&quot;;</span>
+<span class="nc" id="L64">            artistBio = &quot;&quot;;</span>
+        }
+<span class="nc" id="L66">        return &quot;event&quot;;</span>
+    }
+
+    public String delete() {
+<span class="fc" id="L70">        DAOEvent plo = new DAOEvent();</span>
+<span class="nc" id="L71">        plo.deleteevent(idEvent);</span>
+<span class="nc" id="L72">        artistName = &quot;&quot;;</span>
+<span class="nc" id="L73">        artistBio = &quot;&quot;;</span>
+<span class="nc" id="L74">        return &quot;event&quot;;</span>
+    }
+
+    public String reset() {
+<span class="fc" id="L78">        DAOEvent plo = new DAOEvent();</span>
+<span class="nc" id="L79">        plo.resetevent(this);</span>
+<span class="nc" id="L80">        artistName = &quot;&quot;;</span>
+<span class="nc" id="L81">        artistBio = &quot;&quot;;</span>
+<span class="nc" id="L82">        return &quot;event&quot;;</span>
+    }
+    
+<span class="fc" id="L85">    public Tblevent() {</span>
+<span class="fc" id="L86">    }</span>
+
+<span class="nc" id="L88">    public Tblevent(String artistName, String artistBio) {</span>
+<span class="nc" id="L89">       this.artistName = artistName;</span>
+<span class="nc" id="L90">       this.artistBio = artistBio;</span>
+<span class="nc" id="L91">    }</span>
+   
+    public Integer getIdEvent() {
+<span class="fc" id="L94">        return this.idEvent;</span>
+    }
+    
+    public void setIdEvent(Integer idEvent) {
+<span class="fc" id="L98">        this.idEvent = idEvent;</span>
+<span class="fc" id="L99">    }</span>
+    public String getArtistName() {
+<span class="fc" id="L101">        return this.artistName;</span>
+    }
+    
+    public void setArtistName(String artistName) {
+<span class="fc" id="L105">        this.artistName = artistName;</span>
+<span class="fc" id="L106">    }</span>
+    public String getArtistBio() {
+<span class="fc" id="L108">        return this.artistBio;</span>
+    }
+    
+    public void setArtistBio(String artistBio) {
+<span class="fc" id="L112">        this.artistBio = artistBio;</span>
+<span class="fc" id="L113">    }</span>
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

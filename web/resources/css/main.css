@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f5f5; /* Background color for the entire page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.model-content {
+    background-color: #fefefe;
+    width: 400px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+.logo {
+    width: 230px;
+    margin: 0 auto 20px auto; /* Center the logo and add some margin */
+}
+
+h4 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.input_text {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.button_log {
+    background-color: #004aad;
+    color: white;
+    padding: 12px 16px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 8px;
+    transition: background-color 0.3s; /* Add a smooth hover effect */
+}
+
+.button_log:hover {
+    background-color: #00388a; /* Darker shade of blue on hover */
+}
+
+p {
+    font-size: 12px;
+    color: #545D60;
+    margin-top: 10px;
+}

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DAOTicket.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Musicfest&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">DAO</a> &gt; <span class="el_source">DAOTicket.java</span></div><h1>DAOTicket.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package DAO;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import pojo.AbsoluteUtil;
+import pojo.Tblticket;
+
+<span class="fc" id="L16">public class DAOTicket {</span>
+    public List&lt;Tblticket&gt; getBy(String uTid, String uPI, String uTcd) 
+   {
+<span class="fc" id="L19">       Transaction trans = null;</span>
+<span class="fc" id="L20">       Tblticket tc = new Tblticket();</span>
+<span class="fc" id="L21">       List&lt;Tblticket&gt; ticket = new ArrayList();</span>
+       
+<span class="nc" id="L23">       Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+       try{
+           
+<span class="nc" id="L26">           trans = session.beginTransaction();</span>
+<span class="nc" id="L27">           Query query = session.createQuery(&quot;from Tblticket where IdTicket=:uTid AND ticketType=:uPI AND ticketCode=:uTcd&quot;);</span>
+<span class="nc" id="L28">           query.setString(&quot;uTid&quot;, uTid);</span>
+<span class="nc" id="L29">           query.setString(&quot;uPI&quot;, uPI);</span>
+<span class="nc" id="L30">           query.setString(&quot;uTcd&quot;, uTcd);</span>
+<span class="nc" id="L31">           tc = (Tblticket) query.uniqueResult();</span>
+<span class="nc" id="L32">           ticket = query.list();</span>
+<span class="nc" id="L33">           trans.commit();</span>
+<span class="nc" id="L34">       } catch (Exception e){</span>
+<span class="nc" id="L35">           System.out.println(e);</span>
+<span class="nc" id="L36">       }</span>
+<span class="nc" id="L37">       return ticket;</span>
+   }
+   
+   public void addTicket(Tblticket ticket)
+   {
+<span class="fc" id="L42">       Transaction trans = null;</span>
+<span class="nc" id="L43">       Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+       try{
+<span class="nc" id="L45">           trans = session.beginTransaction();</span>
+<span class="nc" id="L46">           session.save(ticket);</span>
+<span class="nc" id="L47">           trans.commit();</span>
+<span class="nc" id="L48">       }catch(Exception e){</span>
+<span class="nc" id="L49">           System.out.println(e);</span>
+<span class="nc" id="L50">       }</span>
+<span class="nc" id="L51">   }</span>
+  
+   public List&lt;Tblticket&gt; retreveTicket()
+   {
+<span class="fc" id="L55">       List tic = new ArrayList();</span>
+<span class="fc" id="L56">       Tblticket tic1 = new Tblticket();</span>
+<span class="fc" id="L57">       Transaction trans = null;</span>
+<span class="nc" id="L58">       Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+       try{
+<span class="nc" id="L60">           trans = session.beginTransaction();</span>
+<span class="nc" id="L61">           Query query = session.createQuery(&quot;from Tblticket&quot;);</span>
+<span class="nc" id="L62">           tic = query.list();</span>
+<span class="nc" id="L63">           tic.add(tic1.getIdTicket());</span>
+<span class="nc" id="L64">           tic.add(tic1.getTicketCode());</span>
+<span class="nc" id="L65">           tic.add(tic1.getTicketType());</span>
+<span class="nc" id="L66">           trans.commit();</span>
+<span class="nc" id="L67">       }catch(Exception e){</span>
+<span class="nc" id="L68">           System.out.println(e);</span>
+<span class="nc" id="L69">       }</span>
+<span class="nc" id="L70">       return tic;</span>
+   }
+   
+
+   
+   public List&lt;Tblticket&gt; getbyID(String idT)
+   {
+<span class="fc" id="L77">       Tblticket tic = new Tblticket();</span>
+<span class="fc" id="L78">       List&lt;Tblticket&gt; lTic = new ArrayList();</span>
+       
+<span class="fc" id="L80">       Transaction trans = null;</span>
+<span class="nc" id="L81">       Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+       
+       try{
+<span class="nc" id="L84">           trans = session.beginTransaction();</span>
+<span class="nc" id="L85">           Query query = session.createQuery(&quot;from Tblticket where ticket_ID= :id&quot;);</span>
+<span class="nc" id="L86">           query.setString(&quot;id&quot;, idT);</span>
+<span class="nc" id="L87">           tic = (Tblticket) query.uniqueResult();</span>
+<span class="nc" id="L88">           lTic = query.list();</span>
+<span class="nc" id="L89">           trans.commit();</span>
+<span class="nc" id="L90">       } catch (Exception e){</span>
+<span class="nc" id="L91">           System.out.println(e);</span>
+<span class="nc" id="L92">       }</span>
+<span class="nc" id="L93">       return lTic;</span>
+   }
+   
+   public void deleteTicket(Integer idT)
+   {
+<span class="fc" id="L98">       Transaction trans = null;</span>
+<span class="nc" id="L99">       Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+       
+       try{
+<span class="nc" id="L102">           trans = session.beginTransaction();</span>
+<span class="nc" id="L103">           Tblticket tic = (Tblticket) session.load(Tblticket.class, new Integer(idT));</span>
+<span class="nc" id="L104">           session.delete(tic);</span>
+<span class="nc" id="L105">           trans.commit();</span>
+<span class="nc" id="L106">       }catch (Exception e){</span>
+<span class="nc" id="L107">           System.out.println(e);</span>
+<span class="nc" id="L108">       }</span>
+<span class="nc" id="L109">   }</span>
+   
+   public void editTicket(Tblticket tic)
+   {
+<span class="fc" id="L113">       Transaction trans = null;</span>
+<span class="nc" id="L114">       Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+       
+       try{
+<span class="nc" id="L117">           trans = session.beginTransaction();</span>
+<span class="nc" id="L118">           session.update(tic);</span>
+<span class="nc" id="L119">           trans.commit();</span>
+<span class="nc" id="L120">       } catch (Exception e){</span>
+<span class="nc" id="L121">           System.out.println(e);</span>
+<span class="nc" id="L122">       }</span>
+<span class="nc" id="L123">   }</span>
+   
+   public void restTicket(Tblticket tic)
+   {
+<span class="fc" id="L127">       Transaction trans = null;</span>
+<span class="nc" id="L128">       Session session = AbsoluteUtil.getSessionFactory().openSession();</span>
+       
+       try{
+<span class="nc" id="L131">           trans = session.beginTransaction();</span>
+<span class="nc" id="L132">           session.clear();</span>
+<span class="nc" id="L133">           trans.commit();</span>
+<span class="nc" id="L134">       }catch(Exception e){</span>
+<span class="nc" id="L135">           System.out.println(e);</span>
+<span class="nc" id="L136">       }</span>
+<span class="nc" id="L137">   }</span>
+
+    public void resetTicket(Tblticket aThis) {
+<span class="fc" id="L140">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

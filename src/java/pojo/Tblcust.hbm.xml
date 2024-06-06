@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 15, 2023 10:00:20 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.Tblcust" table="tblcust" catalog="projectanjay" optimistic-lock="version">
+        <id name="idCustomer" type="java.lang.Integer">
+            <column name="id_customer" />
+            <generator class="identity" />
+        </id>
+        <property name="namaCustomer" type="string">
+            <column name="nama_customer" length="100" not-null="true" />
+        </property>
+        <property name="alamat" type="string">
+            <column name="alamat" length="100" not-null="true" />
+        </property>
+        <property name="noTlpn" type="string">
+            <column name="no_tlpn" length="15" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
